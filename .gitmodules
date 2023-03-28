@@ -2,3 +2,6 @@
 	path = nitriding
 	url = https://github.com/brave/nitriding.git
 	branch = bdfba7beaa2c04edd4e1b645f477226482c68ac8
+[submodule "gvisor-tap-vsock"]
+	path = gvisor-tap-vsock
+	url = https://github.com/containers/gvisor-tap-vsock
