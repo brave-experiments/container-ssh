@@ -2,8 +2,10 @@
 #
 # Type `make` to build and optionally run the system image
 
+DOCKER ?= docker
+
 ssh.eif: Makefile Dockerfile start.sh nitriding/cmd/nitriding
-	docker build -t ssh:latest .
+	$(DOCKER) build -t ssh:latest .
 	nitro-cli build-enclave --docker-uri ssh:latest --output-file $@
 
 # Checkout the submodule if necessary
