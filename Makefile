@@ -25,7 +25,7 @@ gvproxy_ctl := /tmp/network.sock
 gvproxy: gvisor-tap-vsock/bin/gvproxy
 	sudo gvisor-tap-vsock/bin/gvproxy \
 		-listen vsock://:1024 \
-		-listen unix://$(gvsock_ctl) \
+		-listen unix://$(gvproxy_ctl) \
 		-mtu 65000 &
 	sleep 1
 	sudo curl --unix-socket $(gvproxy_ctl) \
