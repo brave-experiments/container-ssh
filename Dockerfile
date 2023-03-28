@@ -13,8 +13,12 @@ RUN echo 'ubuntu:ubuntu' | chpasswd
 RUN apt-get install -y x11-apps tigervnc-standalone-server i3
 
 # Web browser
-ADD https://brave-browser-apt-release.s3.brave.com/brave-browser-nightly-archive-keyring.gpg /usr/share/keyrings/brave-browser-archive-keyring.gpg
-RUN echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+ADD https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg /usr/share/keyrings/
+RUN chmod 644 /usr/share/keyrings/brave-browser-archive-keyring.gpg
+RUN echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main" > /etc/apt/sources.list.d/brave-browser-release.list
 RUN apt-get update && apt-get install -y brave-browser
+
+# Remove package metadata to reduce image size
+RUN apt-get clean
 
 CMD ["/start.sh"]
