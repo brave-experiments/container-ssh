@@ -15,3 +15,14 @@ nitriding/cmd/Makefile:
 # Build the nitriding daemon
 nitriding/cmd/nitriding: nitriding/cmd/Makefile
 	make -C $(dir $@)
+
+run: ssh.eif
+	nitro-cli run-enclave \
+		--cpu-count 2 \
+		--memory 4000 \
+		--eif-path $< \
+		--attach-console
+
+clean:
+	make -C nitriding/cmd clean
+	$(RM) ssh.eif
